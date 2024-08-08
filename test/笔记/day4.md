@@ -13,12 +13,12 @@ vuex经常用的套路是state、mutations、actions、getters、modules
 1.3注意的事项
 注意1：以后在开发项目的时候，如果发现某一个组件在项目当中多个地方出现频繁的使用
 咱们经常把这类的组件注册为全局组件。
-注册全局组件的好处是什么那：只需要注册一次，可以在程序任意地方使用
+注册全局组件的好处是什么：只需要注册一次，可以在程序任意地方使用
 
-注意2:咱们经常把项目中共用的全局组件放置于components里面，以后需要注意，
+注意2:把项目中共用的全局组件放置于components里面，以后需要注意，
 项目当中全局组件（共用的组件）一般放置于components文件夹中
 
-注意3：全局组件只需要注册一次，就可以在项目当中任意的地方使用，注册全局组件一般是在入口文件注册。
+注意3：全局组件只需要注册一次，就可以在项目当中任意的地方使用，注册全局组件一般是在入口文件mian.js注册。
 
 
 
@@ -36,7 +36,7 @@ vuex经常用的套路是state、mutations、actions、getters、modules
 3.4现在这个问题【三级联动：本身在search模块应该有显示与隐藏的业务】 ，但是在home模块下不应该出现显示与隐藏的业务
 说白了：你需要让三级联动组件知道谁在用它。
 3.5:通过$route让组件区分在那个模块下
-以后在功的时候，如果出现某一个组件要区分当前在哪一个模块中【home、search】，通过$route路由信息区分
+以后在功的时候，如果出现某一个组件要区分当前在哪一个模块中【home、search】，通过$route路由信息区分,使用元数据
 3.6路由跳转的时候，相应的组件会把重新销毁与创建----【kepp-alive】
 
 
@@ -47,7 +47,7 @@ vuex经常用的套路是state、mutations、actions、getters、modules
 最早接触的时候:CSS3
 Vue当中也有过渡动画效果---transition内置组件完成
 4.1:注意1,在Vue当中，你可以给 （某一个节点）|（某一个组件）添加过渡动画效果
-但是需要注意，节点|组件务必出现v-if|v-show指令才可以使用。
+但是需要注意，节点|组件务必出现v-if|v-show指令才可以使用过度动画。
 
 
 
@@ -86,14 +86,13 @@ leader（老大）刚开完会，前端与后端负责哪些模块，后端人�
 
 
 6.1mock数据。
-注意：因为后台老师没有给我们写好其他接口【老师们特意的：因为就是想练习mock数据】
-但是项目中mock数据，你就把他当中真实接口数据用就行。
+注意：
+项目中mock数据，你就把他当中真实接口数据用就行。
 
 注意：mock（模拟数据）数据需要使用到mockjs模块，可以帮助我们模拟数据。
 注意：mockjs【并非mock.js mock-js】
 http://mockjs.com/  官方地址
 
-mock官网一句话：晚上练习的时候，如果网速可以，看看mock的官网，看看语法规则；
 生成随机数据，拦截 Ajax 请求
 mock官网当中这句话的理解：
 模拟的数据一般：对象、数组
@@ -102,38 +101,32 @@ mock官网当中这句话的理解：
 }
 拦截ajax请求：请求发布出去【浏览器会进行拦截：笨想，因为服务器】，只是项目当中本地自己玩耍数据。
 
-
+mock使用方法
 第一步:安装依赖包mockjs
-
-第二部：在src文件夹下创建一个文件夹，文件夹mock文件夹。
-
-第三步:准备模拟的数据
-把mock数据需要的图片放置于public文件夹中！
+第二部：在src文件夹下创建一个mock文件夹
+第三步:准备模拟的json数据,放置在src中
+把mock数据需要的图片放置于public文件夹中！public在打包过程中可以把相应的资源原封不动的打包在dist文件中
 比如:listContainer中的轮播图的数据
 [
    {id:1,imgUrl:'xxxxxxxxx'}, 
    {id:2,imgUrl:'xxxxxxxxx'}, 
    {id:3,imgUrl:'xxxxxxxxx'}, 
 ]
-
 第四步：在mock文件夹中创建一个server.js文件
 注意：在server.js文件当中对于banner.json||floor.json的数据没有暴露，但是可以在server模块中使用。
 对于webpack当中一些模块：图片、json，不需要对外暴露，因为默认就是对外暴露。
 
-
 第五步:通过mock模块模拟出数据
-
 通过Mock.mock方法进行模拟数据
 
-
-第六步:回到入口文件，引入serve.js
+第六步:回到入口main.js文件，引入serve.js
 mock需要的数据|相关mock代码页书写完毕，关于mock当中serve.js需要执行一次，
 如果不执行，和你没有书写一样的。
 
-
-
 第七步:在API文件夹中创建mockRequest【axios实例：baseURL:'/mock'】
 专门获取模拟数据用的axios实例。
+在store里面设置action mutation以及store的配置
+bannerList: []
 
 在开发项目的时候：切记，单元测试，某一个功能完毕，一定要测试是否OK
 
@@ -148,8 +141,6 @@ mock需要的数据|相关mock代码页书写完毕，关于mock当中serve.js�
 7.5：开发动态业务
 
 
-
-
 8)swiper基本的使用？
 
 8.1:swiper可以在移动端使用？还是PC端使用？
@@ -158,9 +149,24 @@ mock需要的数据|相关mock代码页书写完毕，关于mock当中serve.js�
 8.2:swiper常用于哪些场景？
 常用的场景即为轮播图----【carousel:轮播图】
 swiper最新版本为7版本的，项目当中使用的是5版本
+使用的方法：第一步：引包
+第二步：页面的结构必须要有,要在所有渲染结束后
+第三步轮播图添加动态的效果
 
 https://www.swiper.com.cn/ 官网地址
 
+轮播图Listcontainer的开发重点：
+在项目中的使用
+第一步。安装swiper npm install swiper@5
+第二步。在要用的地方引入，项目中在pages/Home/ListContainer里面引入
+import Swiper from 'swiper';
+然后上述遍历这个
+ <!-- 这里遍历了轮播图，从mock传来的数据 -->
+ <div class="swiper-slide" v-for=" carousel in bannerList" :key="carousel.id">
+第三步。在main.js文件那里设置，因为这个样式全局都使用的一样的
+//引入swiper样式，用于轮播图
+import 'swiper/css/swiper.css';
+第四步。在mounted设置一个定时器，防止因为异步没有完善渲染导致错误
 
 
 
